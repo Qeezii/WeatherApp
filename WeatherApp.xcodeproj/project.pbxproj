@@ -46,6 +46,8 @@
 		8C2E8C80271558BF0001FBA3 /* nightThunderstorm.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C2E8C6F271558BF0001FBA3 /* nightThunderstorm.json */; };
 		8C2E8C842715688D0001FBA3 /* CitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E8C832715688D0001FBA3 /* CitiesView.swift */; };
 		8C2E8CA32715A72D0001FBA3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2E8CA22715A72D0001FBA3 /* SettingsView.swift */; };
+		8C3843AC274A930100177335 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3843AB274A930100177335 /* LocationManager.swift */; };
+		8C3843AF274A979E00177335 /* MKCoordinateRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3843AE274A979E00177335 /* MKCoordinateRegion.swift */; };
 		8C5DFA102718A4E4001AAFE2 /* CityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5DFA0F2718A4E4001AAFE2 /* CityRow.swift */; };
 		8CE18BBE27188FDE000A1948 /* CitiesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE18BBD27188FDE000A1948 /* CitiesData.swift */; };
 		8CE18BC027189065000A1948 /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE18BBF27189065000A1948 /* Cities.swift */; };
@@ -94,6 +96,9 @@
 		8C2E8C6F271558BF0001FBA3 /* nightThunderstorm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nightThunderstorm.json; sourceTree = "<group>"; };
 		8C2E8C832715688D0001FBA3 /* CitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesView.swift; sourceTree = "<group>"; };
 		8C2E8CA22715A72D0001FBA3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8C3843AB274A930100177335 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8C3843AD274A956000177335 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8C3843AE274A979E00177335 /* MKCoordinateRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegion.swift; sourceTree = "<group>"; };
 		8C5DFA0F2718A4E4001AAFE2 /* CityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityRow.swift; sourceTree = "<group>"; };
 		8CE18BBD27188FDE000A1948 /* CitiesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesData.swift; sourceTree = "<group>"; };
 		8CE18BBF27189065000A1948 /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
@@ -145,10 +150,12 @@
 		8C2E8C2627153A7A0001FBA3 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				8C3843AD274A956000177335 /* Info.plist */,
 				8C2E8C2727153A7A0001FBA3 /* WeatherAppApp.swift */,
 				8C2E8C3627153C090001FBA3 /* View */,
 				8C2E8C3827153C2E0001FBA3 /* ViewModel */,
 				8C2E8C3527153BF70001FBA3 /* Model */,
+				8C3843AA274A92C800177335 /* LocationManager */,
 				8C2E8C3727153C190001FBA3 /* NetworkManager */,
 				8CE18BC127189097000A1948 /* Resources */,
 				8C2E8C5C2715588B0001FBA3 /* LottieAnimations */,
@@ -262,6 +269,15 @@
 				8C2E8CA22715A72D0001FBA3 /* SettingsView.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		8C3843AA274A92C800177335 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				8C3843AB274A930100177335 /* LocationManager.swift */,
+				8C3843AE274A979E00177335 /* MKCoordinateRegion.swift */,
+			);
+			path = LocationManager;
 			sourceTree = "<group>";
 		};
 		8CE18BC127189097000A1948 /* Resources */ = {
@@ -433,6 +449,8 @@
 				8C2E8C5227153F510001FBA3 /* Temperature.swift in Sources */,
 				8C2E8C842715688D0001FBA3 /* CitiesView.swift in Sources */,
 				8C2E8C4827153F0E0001FBA3 /* City.swift in Sources */,
+				8C3843AF274A979E00177335 /* MKCoordinateRegion.swift in Sources */,
+				8C3843AC274A930100177335 /* LocationManager.swift in Sources */,
 				8C2E8C5627153F6A0001FBA3 /* NetworkManager.swift in Sources */,
 				8C2E8C3C27153ECC0001FBA3 /* LottieView.swift in Sources */,
 				8C2E8C5027153F410001FBA3 /* WeatherDaily.swift in Sources */,
@@ -574,6 +592,7 @@
 				DEVELOPMENT_TEAM = TWQBM5NDZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show weather in your location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -606,6 +625,7 @@
 				DEVELOPMENT_TEAM = TWQBM5NDZK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to show weather in your location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
