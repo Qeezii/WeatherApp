@@ -124,6 +124,11 @@ final class CityViewModel: ObservableObject{
         )
     }
 
+    func getWeatherInCurrentLocation(coord: CLLocationCoordinate2D) {
+        let urlString = Api.getUrlFor(lat: coord.latitude, lon: coord.longitude)
+        getWeatherInternal(city: city, for: urlString)
+    }
+
     private func getLocation() {
         CLGeocoder().geocodeAddressString(city) { (placemarks, error) in
             if let places = placemarks, let place = places.first {
