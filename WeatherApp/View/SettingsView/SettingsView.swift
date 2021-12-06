@@ -6,56 +6,13 @@
 //
 
 import SwiftUI
-import CoreLocation
 
 struct SettingsView: View {
 
     var body: some View {
         
-        Text("Test")
+        Text("There will be something here in the future")
 
-//        VStack {
-//            if let location = locationManager.location {
-//                Text("Your location: \(location.latitude), \(location.longitude)")
-//            } else {
-//                Text("Locationg user location...")
-//            }
-//            Button {
-//                locationManager.requestLocation()
-//                Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-//                    if let location = locationManager.location {
-//
-//                        print("\n \(location) \n \(String(format: "%.2f", location.latitude)) \n \(String(format: "%.2f", location.longitude)) \n")
-//
-//                        let geoCoder = CLGeocoder()
-//                        let currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-//                        geoCoder.reverseGeocodeLocation(currentLocation) { placemarks, error -> Void in
-//
-//                            guard let placeMark = placemarks?.first else { return }
-//                            if let locationName = placeMark.location {
-//                                print("\n Location name: \(locationName) \n")
-//                            }
-//                            if let street = placeMark.thoroughfare {
-//                                print("\n Street: \(street) \n")
-//                            }
-//                            if let city = placeMark.subAdministrativeArea {
-//                                print("\n City: \(city) \n")
-//                                cityViewModel.city = city
-//                            }
-//                            if let zip = placeMark.isoCountryCode {
-//                                print("\n Zip: \(zip) \n")
-//                            }
-//                            if let country = placeMark.country {
-//                                print("\n Country: \(country) \n")
-//                            }
-//                        }
-//                    }
-//                }
-//            } label: {
-//                Text("Test")
-//            }
-//
-//        }
     }
 }
 

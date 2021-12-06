@@ -18,6 +18,8 @@ struct CitiesView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
+                // Find city textfield
                 HStack {
                     TextField("Enter City", text: $searchCity)
                         .padding(.horizontal, 20)
@@ -25,6 +27,7 @@ struct CitiesView: View {
                         .foregroundColor(Color.black)
                     Button {
                         cityViewModel.city = searchCity
+                        UserDefaults.standard.set(searchCity, forKey: "City")
                         hideKeyboard()
                         presentationMode.wrappedValue.dismiss()
                     } label: {
@@ -46,6 +49,7 @@ struct CitiesView: View {
                         .fill(Color.gray.opacity(0.2))
                 })
 
+                // Request user`s location button
                 Button {
                     locationManager.requestLocation()
                     Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
@@ -67,6 +71,7 @@ struct CitiesView: View {
                                 if let city = placeMark.subAdministrativeArea {
                                     print("\n City: \(city) \n")
                                     cityViewModel.city = city
+                                    UserDefaults.standard.set(city, forKey: "City")
                                 }
                                 if let zip = placeMark.isoCountryCode {
                                     print("\n Zip: \(zip) \n")
@@ -88,9 +93,11 @@ struct CitiesView: View {
                 }
                 .padding(.top, 5)
 
+                // City list
                 List(cityViewModel.citiesList.filter({ searchCity.count > 2 && "\($0)".contains(searchCity) }), id: \.id) { city in
                     Button(action: {
                         cityViewModel.city = city.name
+                        UserDefaults.standard.set(city.name, forKey: "City")
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
                         CityRow(cities: city)
