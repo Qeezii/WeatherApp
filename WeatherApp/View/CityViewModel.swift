@@ -14,7 +14,7 @@ final class CityViewModel: ObservableObject{
 
     @Published var citiesList: [Cities] = []
     @Published var weather = WeatherResponse.empty()
-    @Published var city: String = "Moscow" {
+    @Published var city: String = UserDefaults.standard.string(forKey: "City") ?? "Moscow" {
         didSet {
             print("\n \(city) \n")
             getLocation()
