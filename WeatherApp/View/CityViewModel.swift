@@ -12,7 +12,7 @@ import CoreLocation
 
 final class CityViewModel: ObservableObject{
 
-    @Published var citiesList: [Cities] = []
+    @Published var citiesArray: [CitiesArray] = []
     @Published var weather = WeatherResponse.empty()
     @Published var city: String = UserDefaults.standard.string(forKey: "City") ?? "Moscow" {
         didSet {
@@ -20,6 +20,7 @@ final class CityViewModel: ObservableObject{
             getLocation()
         }
     }
+    @ObservedObject private var locationManager = LocationManager()
 
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -47,7 +48,6 @@ final class CityViewModel: ObservableObject{
 
     init() {
         getLocation()
-        downloadCitiesList()
     }
 
     var date: String {
@@ -100,8 +100,53 @@ final class CityViewModel: ObservableObject{
         )
     }
 
-    func downloadCitiesList(){
-        citiesList = cities
+    func search(name: String) async {
+        do {
+            let cities = try await CityManager().getCity(searchItem: name)
+            DispatchQueue.main.async {
+                self.citiesArray = cities
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func getUserLocation() {
+        
+        locationManager.requestLocation()
+        
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+            
+            if let location = self.locationManager.location {
+                
+                print("\n \(location) \n \(String(format: "%.2f", location.latitude)) \n \(String(format: "%.2f", location.longitude)) \n")
+                
+                let geoCoder = CLGeocoder()
+                let currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+                geoCoder.reverseGeocodeLocation(currentLocation) { placemarks, error -> Void in
+                    
+                    guard let placeMark = placemarks?.first else { return }
+                    if let locationName = placeMark.location {
+                        print("\n Location name: \(locationName) \n")
+                    }
+                    if let street = placeMark.thoroughfare {
+                        print("\n Street: \(street) \n")
+                    }
+                    if let city = placeMark.subAdministrativeArea {
+                        print("\n City: \(city) \n")
+                        self.city = city
+                        UserDefaults.standard.set(city, forKey: "City")
+                    }
+                    if let zip = placeMark.isoCountryCode {
+                        print("\n Zip: \(zip) \n")
+                    }
+                    if let country = placeMark.country {
+                        print("\n Country: \(country) \n")
+                    }
+                }
+                self.citiesArray.removeAll()
+            }
+        }
     }
 
     func getTempFor(temp: Double) -> String {
