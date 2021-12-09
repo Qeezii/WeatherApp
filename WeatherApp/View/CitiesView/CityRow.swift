@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CityRow: View {
 
-    var cities: Cities
+    var cities: CitiesArray
 
     var body: some View {
         HStack {
@@ -21,9 +21,3 @@ struct CityRow: View {
         }
     }
 }
-
-//struct CityRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CityRow()
-//    }
-//}
