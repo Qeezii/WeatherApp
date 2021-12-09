@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-
 struct City: View {
 
     @ObservedObject var cityViewModel: CityViewModel
 
     var body: some View {
+        
         VStack {
 
             CityNameView(city: cityViewModel.city, date: cityViewModel.date)

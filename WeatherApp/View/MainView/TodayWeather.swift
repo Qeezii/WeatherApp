@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct TodayWeather: View {
+    
     @ObservedObject var cityViewModel: CityViewModel
-//    @EnvironmentObject var cityViewModel: CityViewModel
-
     
     var body: some View {
+        
         VStack(spacing: 10) {
             VStack {
+                
                 HStack(spacing: 0) {
                     Text("\(cityViewModel.temperature)°") // ℃
                         .font(.system(size: 62))
@@ -24,12 +25,14 @@ struct TodayWeather: View {
                 }
 
                 Text(cityViewModel.conditions)
+                
                 Text("Feels like \(cityViewModel.feelLike)℃")
             }
             .padding(.bottom, 25)
 
             HStack {
                 VStack(alignment: .leading, spacing: 0) {
+                    
                     HStack {
                         Image(systemName: "wind")
                         Text("\(cityViewModel.windSpeed) km/hr")
@@ -53,7 +56,9 @@ struct TodayWeather: View {
                         Text("\(cityViewModel.rainChances)")
                     }
                 }
+                
                 HourlyWeather(cityViewModel: cityViewModel)
+                
             }
             .padding(.horizontal, -15)
         }

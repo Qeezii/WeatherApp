@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct SettingsView: View {
+
     var body: some View {
-        Text("In the future there will be settings here")
+        
+        Text("There will be something here in the future")
+
     }
 }
 

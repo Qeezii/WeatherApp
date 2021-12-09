@@ -8,6 +8,7 @@
 import Foundation
 
 final class  NetworkManager<T: Codable> {
+    
     static func fetch(for url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard error == nil else {

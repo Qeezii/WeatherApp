@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @StateObject var cityViewModel = CityViewModel()
 
     var body: some View {
+        
         ZStack(alignment: .bottom) {
             NavigationView {
+                
                 VStack(spacing: 0) {
                     ScrollView(showsIndicators: false) {
                         City(cityViewModel: cityViewModel)
