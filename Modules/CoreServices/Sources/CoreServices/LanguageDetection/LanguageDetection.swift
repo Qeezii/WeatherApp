@@ -9,9 +9,11 @@ import Foundation
 import NaturalLanguage
 import CoreML
 
-final class LanguageDetection {
+public class LanguageDetection {
+    
+    public init() {}
         
-    static func detectLanguage(text: String) -> String? {
+    public func detectLanguage(text: String) -> String? {
         
         let recognizer = NLLanguageRecognizer()
         recognizer.languageConstraints = [.english, .russian]

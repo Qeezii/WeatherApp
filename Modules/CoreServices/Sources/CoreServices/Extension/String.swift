@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    var encodeUrl : String
+    public var encodeUrl : String
         {
             return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         }

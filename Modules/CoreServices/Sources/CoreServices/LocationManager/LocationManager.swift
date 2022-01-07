@@ -8,33 +8,36 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject, ObservableObject {
+public class LocationManager: NSObject, ObservableObject {
 
     private let locationManager = CLLocationManager()
-    @Published var location: CLLocationCoordinate2D?
+    
+    public var location: CLLocationCoordinate2D?
+    
     var defaultCoordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: 37.332331, longitude: -122.031219)
     }
 
-    override init() {
+    public override init() {
         super.init()
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestAlwaysAuthorization()
-//        locationManager.startUpdatingLocation()
         locationManager.delegate = self
     }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
 
-    func requestLocation() {
-//        locationManager.requestLocation()
+    public func requestLocation() {
         locationManager.startUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         guard let location = locations.first?.coordinate else { return }
+        
         DispatchQueue.main.async {
             self.location = location
         }

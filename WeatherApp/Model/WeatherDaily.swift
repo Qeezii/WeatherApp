@@ -15,8 +15,8 @@ struct  WeatherDaily: Codable, Identifiable {
     
     enum CodingKey: String {
         case dt
-    case temp
-    case weather
+        case temp
+        case weather
     }
     
     init() {
