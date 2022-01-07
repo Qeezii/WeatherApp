@@ -14,6 +14,8 @@ struct WeatherAppApp: App {
     
     init() {
         print("📟 AppSUIApp application is starting up. App initialiser.")
+        
+        Configurator.shared.register()
     }
     
     var body: some Scene {
