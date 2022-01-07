@@ -7,15 +7,21 @@
 
 import Foundation
 
-struct CitiesResponse: Decodable {
+struct CitiesResponse: Codable {
     let cities: [CitiesArray]
     
     private enum CodingKeys: String, CodingKey {
         case cities = "data"
     }
+    
+//    static func empty() -> CitiesResponse {
+////        return CitiesResponse(cities: [CitiesArray](repeating: CitiesArray(), count: <#T##Int#>))
+//
+//        return CitiesResponse(cities: [CitiesArray])
+//    }
 }
 
-struct CitiesArray: Decodable {
+struct CitiesArray: Codable {
     let id: Int
     let name: String
     let country: String

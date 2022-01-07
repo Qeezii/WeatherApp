@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  WeatherRecive.swift
 //  WeatherApp
 //
 //  Created by Алексей Полетаев on 12.10.2021.
@@ -7,10 +7,14 @@
 
 import Foundation
 
-final class  NetworkManager<T: Codable> {
-    
-    static func fetch(for url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
+public class WeatherRecive<T: Codable> {
+
+    public init() {}
+
+    public func fetch(for url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
+
         URLSession.shared.dataTask(with: url) { (data, response, error) in
+
             guard error == nil else {
                 print(String(describing: error))
                 completion(.failure(.error(err: error!.localizedDescription)))
@@ -38,7 +42,7 @@ final class  NetworkManager<T: Codable> {
     }
 }
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     case invalidResponse
     case invalidData
     case decodingError(err: String)

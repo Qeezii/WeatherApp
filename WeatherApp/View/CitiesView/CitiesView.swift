@@ -55,7 +55,7 @@ struct CitiesView: View {
             .onChange(of: searchCity) { value in
                 Task {
                     if !value.isEmpty &&  value.count > 3 {
-                        await cityViewModel.search(name: value)
+                        await cityViewModel.getCity(searchCityName: value)
                     } else {
                         cityViewModel.citiesArray.removeAll()
                     }
