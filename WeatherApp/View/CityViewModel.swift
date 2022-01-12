@@ -14,8 +14,8 @@ import CoreServices
 final class CityViewModel: ObservableObject {
     
     @Injected var locationManager: LocationManager?
-    @Injected var weatherRecive: WeatherRecive<WeatherResponse>?
-    @Injected var citiesRecive: CitiesRecive<CitiesResponse>?
+    @Injected var weatherRecive: WeatherReceive<WeatherResponse>?
+    @Injected var citiesRecive: CitiesReceive<CitiesResponse>?
     @Injected var api: Api?
     @Injected var languageDetection: LanguageDetection?
 
@@ -199,7 +199,7 @@ final class CityViewModel: ObservableObject {
     }
 
     private func getWeatherRecive(for url: URL) {
-        weatherRecive?.fetch(for: url) { (result) in
+        weatherRecive?.network.fetch(for: url, completion: { result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -208,11 +208,11 @@ final class CityViewModel: ObservableObject {
             case .failure(let err):
                 print(err)
             }
-        }
+        })
     }
     
     private func getCitiesRecive(for url: URL) {
-        citiesRecive?.fetch(for: url) { (result) in
+        citiesRecive?.network.fetch(for: url, completion: { result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
@@ -221,7 +221,7 @@ final class CityViewModel: ObservableObject {
             case .failure(let err):
                 print(err)
             }
-        }
+        })
     }
 
     func getLottieAnimationFor(icon: String) -> String {

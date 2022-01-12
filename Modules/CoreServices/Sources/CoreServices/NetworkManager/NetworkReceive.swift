@@ -1,13 +1,13 @@
 //
-//  WeatherRecive.swift
-//  WeatherApp
+//  NetworkReceive.swift
+//  
 //
-//  Created by Алексей Полетаев on 12.10.2021.
+//  Created by Алексей Полетаев on 11.01.2022.
 //
 
 import Foundation
 
-public class WeatherRecive<T: Codable> {
+public class NetworkReceive<T: Codable> {
 
     public init() {}
 
