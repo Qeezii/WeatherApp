@@ -16,8 +16,9 @@ class Configurator {
 
         ServiceLocator.shared.addServices(service: LocationManager())
         ServiceLocator.shared.addServices(service: LanguageDetection())
-        ServiceLocator.shared.addServices(service: WeatherReceive<WeatherResponse>())
-        ServiceLocator.shared.addServices(service: CitiesReceive<CitiesResponse>())
+//        ServiceLocator.shared.addServices(service: WeatherReceive<WeatherResponse>())
+//        ServiceLocator.shared.addServices(service: CitiesReceive<CitiesResponse>())
+        ServiceLocator.shared.addServices(service: NetworkReceive())
         ServiceLocator.shared.addServices(service: Api())
     }
 }

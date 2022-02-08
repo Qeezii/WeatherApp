@@ -7,11 +7,11 @@
 
 import Foundation
 
-public class NetworkReceive<T: Codable> {
+public class NetworkReceive {
 
     public init() {}
 
-    public func fetch(for url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    public func fetch<T: Codable>(_ t: T.Type, for url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
 
         URLSession.shared.dataTask(with: url) { (data, response, error) in
 

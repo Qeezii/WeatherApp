@@ -13,12 +13,6 @@ struct CitiesResponse: Codable {
     private enum CodingKeys: String, CodingKey {
         case cities = "data"
     }
-    
-//    static func empty() -> CitiesResponse {
-////        return CitiesResponse(cities: [CitiesArray](repeating: CitiesArray(), count: <#T##Int#>))
-//
-//        return CitiesResponse(cities: [CitiesArray])
-//    }
 }
 
 struct CitiesArray: Codable {
