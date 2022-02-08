@@ -14,8 +14,7 @@ import CoreServices
 final class CityViewModel: ObservableObject {
     
     @Injected var locationManager: LocationManager?
-    @Injected var weatherRecive: WeatherReceive<WeatherResponse>?
-    @Injected var citiesRecive: CitiesReceive<CitiesResponse>?
+    @Injected var network: NetworkReceive?
     @Injected var api: Api?
     @Injected var languageDetection: LanguageDetection?
 
@@ -27,7 +26,7 @@ final class CityViewModel: ObservableObject {
             getLocation()
         }
     }
-
+            
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -51,10 +50,6 @@ final class CityViewModel: ObservableObject {
         formatter.dateFormat = "hh:mm"
         return formatter
     }()
-
-    init() {
-        getLocation()
-    }
 
     var date: String {
         return dateFormatter.string(
@@ -106,28 +101,25 @@ final class CityViewModel: ObservableObject {
         )
     }
     
+    init() {
+        getLocation()
+    }
+    
     func getCity(searchCityName: String) async {
-        
         let language = languageDetection?.detectLanguage(text: searchCityName) ?? "en"
         guard let urlString = api?.getUrlForCities(searchCityName: searchCityName, languageSearch: language) else { return }
         guard let url = URL(string: urlString.encodeUrl) else { return }
-        getCitiesRecive(for: url)
+        getCitiesReceive(for: url)
     }
 
     func getUserLocation() {
-        
         locationManager?.requestLocation()
-        
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-            
             if let location = self.locationManager?.location {
-                
                 print("\n \(location) \n \(String(format: "%.2f", location.latitude)) \n \(String(format: "%.2f", location.longitude)) \n")
-                
                 let geoCoder = CLGeocoder()
                 let currentLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
                 geoCoder.reverseGeocodeLocation(currentLocation) { placemarks, error -> Void in
-                    
                     guard let placeMark = placemarks?.first else { return }
                     if let locationName = placeMark.location {
                         print("\n Location name: \(locationName) \n")
@@ -175,7 +167,7 @@ final class CityViewModel: ObservableObject {
     func getWeatherInCurrentLocation(coord: CLLocationCoordinate2D) {
         guard let urlString = api?.getUrlForWeatherWith(lat: coord.latitude, lon: coord.longitude) else { return }
         guard let url = URL(string: urlString) else { return }
-        getWeatherRecive(for: url)
+        getWeatherReceive(for: url)
     }
 
     private func getLocation() {
@@ -190,38 +182,28 @@ final class CityViewModel: ObservableObject {
         if let coord = coord {
             guard let urlString = api?.getUrlForWeatherWith(lat: coord.latitude, lon: coord.longitude) else { return }
             guard let url = URL(string: urlString) else { return }
-            getWeatherRecive(for: url)
+            getWeatherReceive(for: url)
         } else {
             guard let urlString = api?.getUrlForWeatherWith(lat: 0, lon: 0) else { return }
             guard let url = URL(string: urlString) else { return }
-            getWeatherRecive(for: url)
+            getWeatherReceive(for: url)
         }
     }
-
-    private func getWeatherRecive(for url: URL) {
-        weatherRecive?.network.fetch(for: url, completion: { result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self.weather = response
-                }
-            case .failure(let err):
-                print(err)
-            }
-        })
+    
+    private func getWeatherReceive(for url: URL) {
+        guard let network = network else { return }
+        let weatherReceive = WeatherReceive.init(network: network)
+        weatherReceive.getWeatherRecive(for: url) { result in
+            self.weather = result
+        }
     }
     
-    private func getCitiesRecive(for url: URL) {
-        citiesRecive?.network.fetch(for: url, completion: { result in
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self.citiesArray = response.cities
-                }
-            case .failure(let err):
-                print(err)
-            }
-        })
+    private func getCitiesReceive(for url: URL) {
+        guard let network = network else { return }
+        let citiesReceive = CitiesReceive.init(network: network)
+        citiesReceive.getCitiesRecive(for: url) { result in
+            self.citiesArray = result
+        }
     }
 
     func getLottieAnimationFor(icon: String) -> String {
